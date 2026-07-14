@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gen C-yborg 2026 | TH.A.I. Land Taskforce</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Kanit:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --az-purple: #830051;
+            --az-purple-dark: #5C0039;
+            --az-purple-light: #A8006A;
+            --az-gold: #FFD700;
+            --az-gold-dark: #C8A800;
+            --az-magenta: #E40046;
+            --az-cyan: #00B0F0;
+            --az-dark: #0D0118;
+            --az-dark-card: #1A0A2E;
+            --az-gradient-1: linear-gradient(135deg, #830051, #2D1B69);
+            --az-gradient-2: linear-gradient(135deg, #FFD700, #FF8C00);
+            --az-gradient-3: linear-gradient(135deg, #E40046, #830051);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Kanit', 'Poppins', sans-serif;
+            background: var(--az-dark);
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at center, rgba(131, 0, 81, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 20%, rgba(0, 176, 240, 0.1) 0%, transparent 40%),
+                        radial-gradient(ellipse at 20% 80%, rgba(228, 0, 70, 0.1) 0%, transparent 40%);
+            animation: bgRotate 30s linear infinite;
+        }
+
+        @keyframes bgRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--az-gold);
+            border-radius: 50%;
+            animation: float 8s infinite ease-in-out;
+            opacity: 0.4;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.4; }
+            25% { transform: translateY(-100px) translateX(50px); opacity: 0.8; }
+            50% { transform: translateY(-200px) translateX(-30px); opacity: 0.2; }
+            75% { transform: translateY(-100px) translateX(-50px); opacity: 0.6; }
+        }
+
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(131, 0, 81, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(131, 0, 81, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            position: relative;
+        }
+
+        .az-logo {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            color: var(--az-gold);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            animation: fadeInDown 1s ease-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .az-logo i {
+            font-size: 1.5rem;
+            color: var(--az-cyan);
+        }
+
+        .main-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--az-gold), #FF8C00, var(--az-gold), #FFF);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease-in-out infinite, fadeInUp 1.2s ease-out;
+            margin-bottom: 10px;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: var(--az-cyan);
+            margin-bottom: 15px;
+            animation: fadeInUp 1.4s ease-out;
+            text-shadow: 0 0 20px rgba(0, 176, 240, 0.5);
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            animation: fadeInUp 1.6s ease-out;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .cyber-line {
+            width: 200px;
+            height: 2px;
+            background: var(--az-gradient-2);
+            margin: 25px auto;
+            position: relative;
+            animation: expandWidth 2s ease-out;
+        }
+
+        .cyber-line::before, .cyber-line::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            width: 8px;
+            height: 8px;
+            background: var(--az-gold);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .cyber-line::before { left: 0; }
+        .cyber-line::after { right: 0; }
+
+        @keyframes expandWidth {
+            from { width: 0; }
+            to { width: 200px; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin: 50px 0 40px;
+        }
+
+        .section-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, rgba(131, 0, 81, 0.3), rgba(45, 27, 105, 0.3));
+            border: 1px solid rgba(131, 0, 81, 0.5);
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .section-header h2 i {
+            color: var(--az-gold);
+            font-size: 1.5rem;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin: 40px auto;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(131, 0, 81, 0.1), rgba(0, 176, 240, 0.05));
+            border-radius: 20px;
+            border: 1px solid rgba(131, 0, 81, 0.2);
+            max-width: 900px;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .stat-item { text-align: center; }
+
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--az-gold);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 5px;
+        }
+
+        /* Core Team */
+        .core-team {
+            max-width: 1000px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+
+        .core-team-grid {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .core-card {
+            background: linear-gradient(145deg, rgba(131, 0, 81, 0.2), rgba(26, 10, 46, 0.8));
+            border: 2px solid var(--az-gold);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            width: 320px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.1);
+        }
+
+        .core-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255, 215, 0, 0.1), transparent, rgba(131, 0, 81, 0.1), transparent);
+            animation: rotateBorder 6s linear infinite;
+        }
+
+        @keyframes rotateBorder {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .core-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.2), 0 0 40px rgba(131, 0, 81, 0.3);
+        }
+
+        .core-card .card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .core-card .badge {
+            display: inline-block;
+            background: var(--az-gradient-2);
+            color: #000;
+            font-weight: 700;
+            font-size: 0.75rem;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
+            to { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+        }
+
+        /* Avatar Styles */
+        .avatar-wrapper {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 20px;
+        }
+
+        .avatar-ring {
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: var(--az-gold);
+            border-right-color: var(--az-cyan);
+            animation: spinRing 3s linear infinite;
+        }
+
+        @keyframes spinRing {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .avatar {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 215, 0, 0.3);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--az-purple), var(--az-purple-dark));
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .member-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .member-role {
+            font-size: 0.8rem;
+            color: var(--az-cyan);
+            margin-bottom: 5px;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        .member-dept {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Taskforce Grid */
+        .taskforce-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+        }
+
+        .taskforce-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .member-card {
+            background: linear-gradient(145deg, rgba(26, 10, 46, 0.9), rgba(13, 1, 24, 0.9));
+            border: 1px solid rgba(131, 0, 81, 0.3);
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: fadeInUp 0.6s ease-out backwards;
+            cursor: pointer;
+        }
+
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(131, 0, 81, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .member-card:hover::before { left: 100%; }
+
+        .member-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--az-purple-light);
+            box-shadow: 0 15px 40px rgba(131, 0, 81, 0.3), 0 0 20px rgba(131, 0, 81, 0.1);
+        }
+
+        .member-card .avatar-wrapper {
+            width: 110px;
+            height: 110px;
+        }
+
+        .member-card .avatar-ring {
+            width: 120px;
+            height: 120px;
+            border-top-color: var(--az-purple-light);
+            border-right-color: var(--az-magenta);
+        }
+
+        .member-card .avatar {
+            width: 110px;
+            height: 110px;
+            border-color: rgba(131, 0, 81, 0.5);
+        }
+
+        .member-card .member-name { font-size: 0.95rem; }
+        .member-card .member-role { font-size: 0.75rem; color: var(--az-magenta); }
+
+        .role-tag {
+            display: inline-block;
+            background: rgba(131, 0, 81, 0.3);
+            color: var(--az-gold);
+            font-size: 0.7rem;
+            padding: 3px 12px;
+            border-radius: 10px;
+            margin-top: 8px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            font-weight: 500;
+        }
+
+        .lead-tag {
+            background: rgba(255, 215, 0, 0.15);
+            border-color: rgba(255, 215, 0, 0.4);
+            color: var(--az-gold);
+            animation: glow 2s infinite alternate;
+        }
+
+        /* Animation Delays */
+        .member-card:nth-child(1) { animation-delay: 0.1s; }
+        .member-card:nth-child(2) { animation-delay: 0.15s; }
+        .member-card:nth-child(3) { animation-delay: 0.2s; }
+        .member-card:nth-child(4) { animation-delay: 0.25s; }
+        .member-card:nth-child(5) { animation-delay: 0.3s; }
+        .member-card:nth-child(6) { animation-delay: 0.35s; }
+        .member-card:nth-child(7) { animation-delay: 0.4s; }
+        .member-card:nth-child(8) { animation-delay: 0.45s; }
+        .member-card:nth-child(9) { animation-delay: 0.5s; }
+        .member-card:nth-child(10) { animation-delay: 0.55s; }
+        .member-card:nth-child(11) { animation-delay: 0.6s; }
+        .member-card:nth-child(12) { animation-delay: 0.65s; }
+        .member-card:nth-child(13) { animation-delay: 0.7s; }
+        .member-card:nth-child(14) { animation-delay: 0.75s; }
+        .member-card:nth-child(15) { animation-delay: 0.8s; }
+        .member-card:nth-child(16) { animation-delay: 0.85s; }
+        .member-card:nth-child(17) { animation-delay: 0.9s; }
+        .member-card:nth-child(18) { animation-delay: 0.95s; }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(131, 0, 81, 0.2);
+            margin-top: 40px;
+        }
+
+        .footer p {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.85rem;
+        }
+
+        .footer .az-brand {
+            color: var(--az-purple-light);
+            font-weight: 600;
+        }
+
+        /* Floating Icons */
+        .float-icon {
+            position: fixed;
+            font-size: 1.5rem;
+            opacity: 0.08;
+            animation: floatIcon 10s infinite ease-in-out;
+            color: var(--az-purple-light);
+        }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-title { font-size: 2rem; }
+            .subtitle { font-size: 1.2rem; }
+            .core-team-grid { gap: 30px; }
+            .core-card { width: 100%; max-width: 320px; }
+            .taskforce-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
+            .stats-bar { gap: 30px; }
+            .section-header h2 { font-size: 1.2rem; padding: 12px 25px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background -->
+    <div class="bg-animation"></div>
+    <div class="grid-overlay"></div>
+    <div class="particles">
+        <div class="particle" style="left:10%;top:20%;animation-delay:0s;"></div>
+        <div class="particle" style="left:20%;top:60%;animation-delay:1s;"></div>
+        <div class="particle" style="left:35%;top:40%;animation-delay:2s;"></div>
+        <div class="particle" style="left:50%;top:80%;animation-delay:3s;"></div>
+        <div class="particle" style="left:65%;top:30%;animation-delay:4s;"></div>
+        <div class="particle" style="left:75%;top:70%;animation-delay:5s;"></div>
+        <div class="particle" style="left:85%;top:50%;animation-delay:6s;"></div>
+        <div class="particle" style="left:90%;top:20%;animation-delay:7s;"></div>
+    </div>
+
+    <!-- Floating Icons -->
+    <i class="fas fa-robot float-icon" style="left:5%;top:15%;animation-delay:0s;"></i>
+    <i class="fas fa-brain float-icon" style="left:90%;top:25%;animation-delay:2s;"></i>
+    <i class="fas fa-microchip float-icon" style="left:8%;top:75%;animation-delay:4s;"></i>
+    <i class="fas fa-dna float-icon" style="left:92%;top:70%;animation-delay:6s;"></i>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="az-logo">
+            <i class="fas fa-atom"></i> AstraZeneca Thailand <i class="fas fa-atom"></i>
+        </div>
+        <h1 class="main-title">Gen C-yborg 2026</h1>
+        <p class="subtitle">TH.A.I. Land 2026 Taskforce</p>
+        <div class="cyber-line"></div>
+        <p class="tagline">
+            <i class="fas fa-bolt" style="color:var(--az-gold);"></i>
+            ทีมพลังแห่งนวัตกรรม AI ที่พร้อมขับเคลื่อนอนาคตของ AstraZeneca Thailand
+            <i class="fas fa-bolt" style="color:var(--az-gold);"></i>
+        </p>
+    </header>
+
+    <!-- Stats -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-number">20</div>
+            <div class="stat-label"><i class="fas fa-users"></i> สมาชิกทั้งหมด</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">12+</div>
+            <div class="stat-label"><i class="fas fa-building"></i> แผนกที่เข้าร่วม</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">2026</div>
+            <div class="stat-label"><i class="fas fa-rocket"></i> ปีแห่งการเปลี่ยนแปลง</div>
+        </div>
+    </div>
+
+    <!-- Core Project Team -->
+    <section class="core-team">
+        <div class="section-header">
+            <h2><i class="fas fa-crown"></i> Core Project Team <i class="fas fa-crown"></i></h2>
+        </div>
+        <div class="core-team-grid">
+            <div class="core-card">
+                <div class="card-content">
+                    <span class="badge">CLT Sponsor</span>
+                    <div class="avatar-wrapper">
+                        <div class="avatar-ring"></div>
+                        <div class="avatar">
+                            <!-- ใส่รูป: photos/tanika.jpg -->
+                            <img src="photos/tanika.jpg" alt="Tanika Pannoppa">
+                        </div>
+                    </div>
+                    <h3 class="member-name">Tanika Pannoppa</h3>
+                    <p class="member-role">Business Unit Director (Oncology)</p>
+                    <p class="member-dept">CLT Sponsor</p>
+                </div>
+            </div>
+            <div class="core-card">
+                <div class="card-content">
+                    <span class="badge">IT Lead</span>
+                    <div class="avatar-wrapper">
+                        <div class="avatar-ring"></div>
+                        <div class="avatar">
+                            <!-- ใส่รูป: photos/sarun.jpg -->
+                            <img src="photos/sarun.jpg" alt="Sarun Nimitkul">
+                        </div>
+                    </div>
+                    <h3 class="member-name">Sarun Nimitkul</h3>
+                    <p class="member-role">Senior IT Manager</p>
+                    <p class="member-dept">Technology & Digital</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Taskforce Members -->
+    <section class="taskforce-section">
+        <div class="section-header">
+            <h2><i class="fas fa-users-cog"></i> Taskforce Members <i class="fas fa-users-cog"></i></h2>
+        </div>
+        <div class="taskforce-grid">
+
+            <!-- 1. Dheeroot -->
+            <div class="member-card">
+                <div class="avatar-wrapper">
+                    <div class="avatar-ring"></div>
+                    <div class="avatar">
+                        <img src="photos/dheeroot.jpg" alt="Dheeroot Temsupanund">
+                    </div>
+                </div>
+                <h3 class="member-name">Dheeroot Temsupanund</h3>
+                <p class="member-role">Marketing Manager<br>Asia Area Frontier Markets</p>
+                <span class="role-tag lead-tag"><i class="fas fa-star"></i> AI Taskforce Lead</span>
+            </div>
+
+            <!-- 2. Prachya -->
+            <div class="member-card">
+                <div class="avatar-wrapper">
+                    <div class="avatar-ring"></div>
+                    <div class="avatar">
+                        <img src="photos/prachya.jpg" alt="Prachya Saratham">
+                    </div>
+                </div>
+                <h3 class="member-name">Prachya Saratham</h3>
+                <p class="member-role">Product Manager<br>CVRM Team</p>
+                <span class="role-tag lead-tag"><i class="fas fa-star"></i> AI Taskforce Co Lead</span>
+            </div>
+
+            <!-- 3. Oranich -->
+            <div class="member-card">
+                <div class="avatar-wrapper">
+                    <div class="avatar-ring"></div>
+                    <div class="avatar">
+                        <img src="photos/oranich.jpg" alt="Oranich Veraarchaku">
+                    </div>
+                </div>
+                <h3 class="member-name">Oranich Veraarchaku</h3>
+                <p class="member-role">Next Leader Associates</p>
+                <span class="role-tag">Future Leader</span>
+            </div>
+
+            <!-- 4. Kanjana -->
+            <div class="member-card">
+                <div class="avatar-wrapper">
+                    <div class="avatar-ring"></div>
+                    <div class="avatar">
+                        <img src="photos/kanjana.jpg" alt="Kanjana Yonchisai">
+                    </div>
+                </div>
+                <h3 class="member-name">Kanjana Yonchisai</h3>
+                <p class="member-role">Finance BP</p>
+                <span class="role-tag">Finance</span>
+            </div>
+
+            <!-- 5. Sutra -->
+            <div class="member-card">
+                <div class="avatar-wrapper">
+                    <div class="avatar-ring"></div>
+                    <div class="avatar">
+                        <img src="photos/sutra.jpg" alt="Sutra Sukunamornrat">
+                    </div>
+                </div>
+                <h3 class="member-name">Sutra Sukunamornrat</h3>
+                <p class="member-role">Study Start-up Manager</p>
+                <span class="role-tag">Clinical Operations</span>
+            </div>
+
+            <!-- 6. Saithong -->
+            <div class="member-card">
+                <div class="avatar-wrapper">
+                    <div class="avatar-ring"></div>
+                    <div class="avatar">
+                        <img src="photos/saithong.jpg" alt="Saithong Malisuwan">
+                    </div>
+                </div>
+                <h3 class="member-name">Saithong Malisuwan</h3>
+                <p class="member-role">Field Market Access Manager</p>
+                <span class="role-tag">Market Access</span>
+            </div>
+
+            <!-- 7. Mayuree -->
+            <div class="member-card">
+                <div class="avatar-wrapper">
+                    <div class="avatar-ring"></div>
+                    <div class="avatar">
+                        <img src="photos/mayuree.jpg" alt="Mayuree Lertchookeit">
+                    </div>
+                </div>
+                <h3 class="member-name">Mayuree Lertchookeit</h3>
+                <p class="member-role">Senior HR BP</p>
+                <span class="role-tag">Human Resources</span>
+            </div>
+
+            <!-- 8. Warintorn -->
+            <div class="member-card">
+                <div class="avatar-wrapper">
+                    <div class="avatar-ring"></div>
+                    <div class="avatar">
+                        <img src="photos/warintorn.jpg" alt="Warintorn Wannaadisai">
+                    </div>
+                </div>
+                <h3 class="member-name">Warintorn Wannaadisai</h3>
+                <p class="member-role">Associate Product Manager</p>
+                <span class="role-tag">Product</span>
+            </div>
+
+            <!-- 9. Narissara -->
+            <div class="member-card">
+                <div class="avatar-wrapper">
+                    <div class="avatar-ring"></div>
+                    <div class="avatar">
+                        <img src="photos/narissara.jpg" alt="Narissara Muangmanee">
+                    </div>
+                </div>
+                <h3 class="member-name">Narissara Muangmanee</h3>
+                <p class="member-role">Product Manager<br>(BBU Expansion)</p>
+                <span class="role-tag">BBU Expansion</span>
+            </div>
+
+            <!-- 10. Sitthiwut -->
+            <div class="member-card">
+                <div class="avatar-wrapper">
+                    <div class="avatar-ring"></div>
+                    <div class="avatar">
+                        <img src="photos/sitthiwut.jpg" alt="Sitthiwut Chaturamaytanon">
+                    </div>
+                </div>
+                <h3 class="member-name">Sitthiwut Chaturamaytanon</h3>
+                <p class="member-role">Key Account Manager<br>Rare Disease</p>
+                <span class="role-tag">Rare Disease</span>
+            </div>
+
+            <!-- 11. Teerawut -->
+            <div class="member-card">
+                <div class="avatar-wrapper">
+                    <div class="avatar-ring"></div>
+                    <div class="avatar">
+                        <img src="photos/teerawut.jpg" alt="Teerawut Ratanasawetasak">
+                    </div>
+                </div>
+                <h3 class="member-name">Teerawut Ratanasawetasak</h3>
+                <p class="member-role">Product Manager<br>Oncology</p>
+                <span class="role-tag">Oncology</span>
+            </div>
+
+            <!-- 12. Sommawan -->
+            <div class="member-card">
+                <div class="avatar-wrapper">
+                    <div class="avatar-ring"></div>
+                    <div class="avatar">
+                        <img src="photos/sommawan.jpg" alt="Sommawan Lowhaphandu">
+                    </div>
+                </div>
+                <h3 class="member-name">Sommawan Lowhaphandu</h3>
+                <p class="member-role">PA & Coms Manager</p>
+                <span class="role-tag">Communications</span>
+            </div>
+
+            <!-- 13. Chadarat -->
+            <div class="member-card">
+                <div class="avatar-wrapper">
+                    <div class="avatar-ring"></div>
+                    <div class="avatar">
+                        <img src="photos/chadarat.jpg" alt="Chadarat Withoosuwan">
+                    </div>
+                </div>
+                <h3 class="member-name">Chadarat Withoosuwan</h3>
+                <p class="member-role">MSL</p>
+                <span class="role-tag">Medical</span>
+            </div>
+
+            <!-- 14. Akedanai -->
+            <div class="member-card">
+                <div class="avatar-wrapper">
+                    <div class="avatar-ring"></div>
+                    <div class="avatar">
+                        <img src="photos/akedanai.jpg" alt="Akedanai Chaimongkonlert">
+                    </div>
+                </div>
+                <h3 class="member-name">Akedanai Chaimongkonlert</h3>
+                <p class="member-role">Senior Product Manager<br>(Rare Diseases)</p>
+                <span class="role-tag">Rare Diseases</span>
+            </div>
+
+            <!-- 15. Pawitra -->
+            <div class="member-card">
+                <div class="avatar-wrapper">
+                    <div class="avatar-ring"></div>
+                    <div class="avatar">
+                        <img src="photos/pawitra.jpg" alt="Pawitra Masa-ah">
+                    </div>
+                </div>
+                <h3 class="member-name">Pawitra Masa-ah</h3>
+                <p class="member-role">Digital Manager</p>
+                <span class="role-tag">Digital</span>
+            </div>
+
+            <!-- 16. Chonlada -->
+            <div class="member-card">
+                <div class="avatar-wrapper">
+                    <div class="avatar-ring"></div>
+                    <div class="avatar">
+                        <img src="photos/chonlada.jpg" alt="Chonlada Saengtai">
+                    </div>
+                </div>
+                <h3 class="member-name">Chonlada Saengtai</h3>
+                <p class="member-role">Senior CRM Analyst<br>(BExI)</p>
+                <span class="role-tag">CRM & Analytics</span>
+            </div>
+
+            <!-- 17. Veekit -->
+            <div class="member-card">
+                <div class="avatar-wrapper">
+                    <div class="avatar-ring"></div>
+                    <div class="avatar">
+                        <img src="photos/veekit.jpg" alt="Veekit Seesung">
+                    </div>
+                </div>
+                <h3 class="member-name">Veekit Seesung</h3>
+                <p class="member-role">Senior Regulatory Affairs Associate (RA)</p>
+                <span class="role-tag">Regulatory Affairs</span>
+            </div>
+
+            <!-- 18. Jittavee -->
+            <div class="member-card">
+                <div class="avatar-wrapper">
+                    <div class="avatar-ring"></div>
+                    <div class="avatar">
+                        <img src="photos/jittavee.jpg" alt="Jittavee Jitkasempong">
+                    </div>
+                </div>
+                <h3 class="member-name">Jittavee Jitkasempong</h3>
+                <p class="member-role">Medical Information & RA Officer (RA)</p>
+                <span class="role-tag">Medical Info & RA</span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>
+            <i class="fas fa-robot" style="color:var(--az-cyan);"></i>
+            Powered by <span class="az-brand">AstraZeneca Thailand</span> | Gen C-yborg 2026
+            <i class="fas fa-robot" style="color:var(--az-cyan);"></i>
+        </p>
+        <p style="margin-top:10px;font-size:0.75rem;">
+            TH.A.I. Land 2026 — Transforming Healthcare with Artificial Intelligence
+        </p>
+    </footer>
+
+    <script>
+        // Intersection Observer for animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.member-card').forEach(el => observer.observe(el));
+
+        // Hover color effect
+        document.querySelectorAll('.member-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.borderColor = `hsl(${Math.random() * 60 + 300}, 70%, 50%)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.borderColor = 'rgba(131, 0, 81, 0.3)';
+            });
+        });
+    </script>
+</body>
+</html>
